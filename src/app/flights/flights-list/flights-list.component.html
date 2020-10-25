@@ -1,0 +1,43 @@
+<mat-card>
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let element; columns: displayedColumns;" [class.inactive]="!element.active"></tr>
+
+        <ng-container [matColumnDef]="NAME_COLUMN">
+            <th mat-header-cell *matHeaderCellDef>Flight</th>
+            <td mat-cell *matCellDef="let element">
+                <span>{{element.displayName}}</span>
+            </td>
+        </ng-container>
+
+        <ng-container [matColumnDef]="DATE_COLUMN">
+            <th mat-header-cell *matHeaderCellDef>Date</th>
+            <td mat-cell *matCellDef="let element">
+                <span>{{element.origin.date | date}}</span>
+            </td>
+        </ng-container>
+
+        <ng-container [matColumnDef]="CONNECTIONS_COLUMN">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Connections</th>
+            <td mat-cell *matCellDef="let element">
+                <span>{{element.numberOfConnections}}</span>
+            </td>
+        </ng-container>
+
+        <ng-container [matColumnDef]="TIME_COLUMN">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Length</th>
+            <td mat-cell *matCellDef="let element">
+                <span>{{element.totalHours}} hours</span>
+            </td>
+        </ng-container>
+
+        <ng-container [matColumnDef]="PRICE_COLUMN">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+            <td mat-cell *matCellDef="let element">
+                <span>{{element.totalPrice}}$</span>
+            </td>
+        </ng-container>
+
+    </table>
+</mat-card>

@@ -1,0 +1,2 @@
+<app-flights-filter (filterChange)="applyFilter($event)"></app-flights-filter>
+<app-flights-list [flightsChange]="flightsChangeEvent.asObservable()"></app-flights-list>

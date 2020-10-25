@@ -1,0 +1,58 @@
+<mat-card>
+    <form [formGroup]="filterFrom">
+        <div class="flex-container">
+            <div class="flex-auto">
+                <mat-form-field>
+                    <mat-label>Origin</mat-label>
+                    <mat-select [formControlName]="ORIGIN_FORM_KEY">
+                        <mat-option *ngFor="let country of countries" [disabled]="!countryAvailable(country)"
+                            [value]="country">
+                            {{country}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="flex-auto">
+                <mat-form-field>
+                    <mat-label>Destination</mat-label>
+                    <mat-select [formControlName]="DESTINATION_FORM_KEY">
+                        <mat-option *ngFor="let country of countries" [disabled]="!countryAvailable(country)"
+                            [value]="country">
+                            {{country}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="flex-auto">
+                <mat-form-field (click)="fromPicker.open()" class="cursor-pointer">
+                    <mat-label>From</mat-label>
+                    <input disabled matInput [formControlName]="FROM_DATE_FORM_KEY" [matDatepicker]="fromPicker">
+                    <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #fromPicker disabled="false"></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="flex-auto">
+                <mat-form-field (click)="toPicker.open()" class="cursor-pointer">
+                    <mat-label>To</mat-label>
+                    <input disabled matInput [formControlName]="TO_DATE_FORM_KEY" [matDatepicker]="toPicker">
+                    <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #toPicker disabled="false"></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="flex-auto">
+                <mat-form-field>
+                    <mat-label>Maximum connections</mat-label>
+                    <mat-select [formControlName]="CONNECTIONS_FORM_KEY">
+                        <mat-option *ngFor="let option of connectionCountOptions" [value]="option.value">
+                            {{option.title}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="flex">
+                <ng5-slider matInput [formControlName]="PRICE_RANGE_FORM_KEY" [options]="priceSliderOptions">
+                </ng5-slider>
+            </div>
+        </div>
+    </form>
+</mat-card>
