@@ -18,6 +18,5 @@ export class FlightsComponent {
   applyFilter(filter: FlightsFilter) {
     this.flights = this.flightsService.listAll(filter);
     this.flightsChangeEvent.next(this.flights);
-    console.log(this.flights);
   }
 }

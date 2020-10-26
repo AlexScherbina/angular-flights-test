@@ -12,6 +12,7 @@ export class FlightsService {
 
         function buildFlightSequence(sequence: Flight[]) {
             const totalPrice = sequence.map(s => s.price).reduce((a, b) => a + (b || 0), 0);
+
             if (sequence[sequence.length - 1].destination.country === filter.destination
                 && totalPrice >= filter.priceRange[0] && totalPrice <= filter.priceRange[1]) {
                 const group = new FlightGroup();
@@ -19,6 +20,7 @@ export class FlightsService {
                 flightGroups.push(group);
                 return;
             }
+
             if (filter.connections >= 0 && sequence.length - 1 >= filter.connections) {
                 return;
             }
@@ -26,6 +28,7 @@ export class FlightsService {
             const lowerDate = sequence[sequence.length - 1].destination.date;
             const upperDate = new Date(lowerDate);
             upperDate.setTime(upperDate.getTime() + (24 * 60 * 60 * 1000));
+
             const next = Flights.filter(f => f.origin.country === sequence[sequence.length - 1].destination.country)
                 .filter(f => f.origin.date >= lowerDate && f.origin.date <= upperDate)
                 .filter(f => (f.price + totalPrice) >= filter.priceRange[0]
